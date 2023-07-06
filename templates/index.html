@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic CRUD Application</title>
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            color: #333;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .create-button,
+        .update-button,
+        .delete-button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .create-button:hover,
+        .update-button:hover,
+        .delete-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Basic CRUD Application</h1>
+
+        <h2>Create</h2>
+        <form action="/create" method="POST">
+            <label for="key">Key:</label>
+            <input type="text" id="key" name="key" required>
+            <label for="value">Value:</label>
+            <input type="text" id="value" name="value" required>
+            <button type="submit" class="create-button">Create</button>
+        </form>
+
+        <h2>Read</h2>
+        <ul>
+        {% for key, value in data.items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Update</h2>
+        <form action="/update" method="POST">
+            <label for="update-key">Key:</label>
+            <input type="text" id="update-key" name="key" required>
+            <label for="update-value">New Value:</label>
+            <input type="text" id="update-value" name="value" required>
+            <button type="submit" class="update-button">Update</button>
+        </form>
+
+        <h2>Delete</h2>
+        <form action="/delete" method="POST">
+            <label for="delete-key">Key>:</label>
+            <input type="text" id="delete-key" name="key" required>
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+    </div>
+</body>
+</html>
